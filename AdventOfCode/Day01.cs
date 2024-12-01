@@ -9,9 +9,11 @@ public class Day01 : BaseDay
         _input = File.ReadAllText(InputFilePath);
     }
 
-    public override ValueTask<string> Solve_1() => new($"{SolveList()}");
+    public override ValueTask<string> Solve_1() => new($"{Solve1()}");
 
-    public long SolveList2()
+    public override ValueTask<string> Solve_2() => new($"{Solve2()}");
+
+    public long Solve2()
     {
         long runningTotal = 0;
         var list1 = new List<long>();
@@ -19,31 +21,23 @@ public class Day01 : BaseDay
         foreach (var line in _input.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries))
         {
             var day = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-
             list1.Add(long.Parse(day[0]));
             list2.Add((long.Parse(day[1])));
-
         }
 
-       // list1 = list1.OrderBy(x => x).ToList();
-       // list2 = list2.OrderBy(x => x).ToList();
         var i = 0;
         foreach (var number1 in list1)
         {
-           var count =  list2.Count(x =>  x == number1);
-
+            var count = list2.Count(x => x == number1);
             long multiple = number1 * count;
-            // Console.WriteLine(difference);
             runningTotal += multiple;
             i++;
-
         }
         return runningTotal;
     }
 
 
-    public long SolveList()
+    public long Solve1()
     {
         long runningTotal = 0;
         var list1 = new List<long>();
@@ -51,28 +45,19 @@ public class Day01 : BaseDay
         foreach (var line in _input.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries))
         {
             var day = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-
             list1.Add(long.Parse(day[0]));
             list2.Add((long.Parse(day[1])));
-
         }
 
-         list1 = list1.OrderBy(x => x).ToList();
-         list2 = list2.OrderBy(x => x).ToList();
+        list1 = list1.OrderBy(x => x).ToList();
+        list2 = list2.OrderBy(x => x).ToList();
         var i = 0;
         foreach (var number1 in list1)
         {
-            //Console.WriteLine($"{list2[i]}-{number1}");
-
             var difference = Math.Abs(list2[i] - number1);
-           // Console.WriteLine(difference);
-                runningTotal += difference;
+            runningTotal += difference;
             i++;
-           
         }
         return runningTotal;
     }
-
-    public override ValueTask<string> Solve_2() => new($"{SolveList2()}");
 }
