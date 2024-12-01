@@ -1,12 +1,27 @@
 ﻿namespace AdventOfCode;
 
-public class Day01 : BaseDay
+public class Day02 : BaseDay
 {
     private readonly string _input;
+    private readonly List<string> _lines;
+    private readonly List<string> _part1;
+    private readonly List<string> _part2;
 
-    public Day01()
+    public Day02()
     {
         _input = File.ReadAllText(InputFilePath);
+        _lines = _input.Split(Environment.NewLine).ToList();
+        foreach (var line in _lines)
+        {
+            //substring
+            //_part1.Add(line.Substring(0,1)); //first char
+            //_part2.Add(line.Substring(1)); //rest
+
+            //split on char
+            //var parts = line.Split(',');
+            //_part1.Add(parts[0]);
+            //_part2.Add(parts[1]);
+        }
     }
 
     public override ValueTask<string> Solve_1() => new($"{Solve1()}");
@@ -15,49 +30,13 @@ public class Day01 : BaseDay
 
     public long Solve2()
     {
-        long runningTotal = 0;
-        var list1 = new List<long>();
-        var list2 = new List<long>();
-        foreach (var line in _input.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries))
-        {
-            var day = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            list1.Add(long.Parse(day[0]));
-            list2.Add((long.Parse(day[1])));
-        }
-
-        var i = 0;
-        foreach (var number1 in list1)
-        {
-            var count = list2.Count(x => x == number1);
-            long multiple = number1 * count;
-            runningTotal += multiple;
-            i++;
-        }
-        return runningTotal;
+        
+        return 0;
     }
 
 
     public long Solve1()
     {
-        long runningTotal = 0;
-        var list1 = new List<long>();
-        var list2 = new List<long>();
-        foreach (var line in _input.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries))
-        {
-            var day = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            list1.Add(long.Parse(day[0]));
-            list2.Add((long.Parse(day[1])));
-        }
-
-        list1 = list1.OrderBy(x => x).ToList();
-        list2 = list2.OrderBy(x => x).ToList();
-        var i = 0;
-        foreach (var number1 in list1)
-        {
-            var difference = Math.Abs(list2[i] - number1);
-            runningTotal += difference;
-            i++;
-        }
-        return runningTotal;
+        return 0;
     }
 }
