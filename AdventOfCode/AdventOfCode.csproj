@@ -15,6 +15,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Helpers\AoC Helper Methods.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Inputs\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
