@@ -24,7 +24,7 @@ public class Day02 : BaseDay
         //}
     }
 
-    public override ValueTask<string> Solve_1() => new($"0");
+    public override ValueTask<string> Solve_1() => new($"{Solve1()}");
 
     public override ValueTask<string> Solve_2() => new($"{Solve2()}");
 
@@ -34,12 +34,21 @@ public class Day02 : BaseDay
         var counter = 0;
         foreach (var line in _lines)
         {
-            Console.WriteLine($"Doing {line}");
+            if (line == "72 69 66 64 61 59 56 59")
+            {
+                var test = "vladf";
+            }
+
+            //Console.WriteLine($"Doing {line}");
             var countchar = line.Split(' ').Count();
             for (var i = 0; i < countchar; i++)
             {
+                if (safecounter.Contains(line))
+                {
+                    continue;
+                }
                 var allNumbers = line.Split(' ').ToList();
-                allNumbers.Remove(allNumbers[i]);
+                allNumbers.RemoveAt(i);
 
                 var previousnumber = 0;
                 var safe = true;
@@ -50,15 +59,24 @@ public class Day02 : BaseDay
 
                 foreach (var item in allNumbers)
                 {
+                    if (String.Join(" ", allNumbers) == "72 69 66 64 61 59 56")
+                    {
+                        var test = "vladf";
+                    }
                     if (firstline)
                     {
                         firstline = false;
                         previousnumber = Int32.Parse(item.ToString());
                         continue;
                     }
+                    if (String.Join(" ", allNumbers) == "72 69 66 64 61 59 56")
+                    {
+                        var test = "vladf";
+                    }
+
                     var difference = previousnumber - Int32.Parse(item.ToString());
                     var differenceAbs = Math.Abs(difference);
-                    if (!(differenceAbs < 4 && differenceAbs > 0))
+                    if (!(differenceAbs <= 3 && differenceAbs > 0))
                     {
                         safe = false;
 
@@ -79,12 +97,19 @@ public class Day02 : BaseDay
                 }
                 if (safe)
                 {
-                    if (decreasing != true || increasing != true)
+                    if ((decreasing != true && increasing == true) || (increasing != true && decreasing == true))
                     {
-                        Console.WriteLine($"Line {line} is safe");
+                        Console.WriteLine($"Line {line} is safe ({String.Join(" ", allNumbers)})");
                         safecounter.Add(line);
                         continue;
+                    }else
+                    {
+                        //Console.WriteLine($"Line {line} is UNSAFE ({String.Join(" ", allNumbers)})");
                     }
+                }
+                else
+                {
+                    //Console.WriteLine($"Line {line} is UNSAFE ({String.Join(" ", allNumbers)})");
                 }
 
             }
@@ -92,7 +117,8 @@ public class Day02 : BaseDay
 
         }
 
-        safecounter.AddRange(helper());
+        
+        //safecounter.AddRange(helper());
         return safecounter.Distinct().Count();
 
     }
@@ -181,6 +207,7 @@ public class Day02 : BaseDay
                     previousnumber = Int32.Parse(item.ToString());
                     continue;
                 }
+                
                 var difference = previousnumber - Int32.Parse(item.ToString());
                 var differenceAbs = Math.Abs(difference);
                 if (!(differenceAbs < 4 && differenceAbs > 0))
@@ -207,7 +234,7 @@ public class Day02 : BaseDay
             {
                 if (decreasing != true || increasing != true)
                 {
-                    Console.WriteLine($"Line {line} is safe");
+                    //Console.WriteLine($"Line {line} is safe");
                     safecounter++;
                 }
             }
