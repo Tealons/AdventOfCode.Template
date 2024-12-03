@@ -13,7 +13,7 @@ public class Day00 : BaseDay
     {
         _input = File.ReadAllText(InputFilePath);
         _lines = _input.Split(Environment.NewLine).ToList();
-        
+
     }
 
     public override ValueTask<string> Solve_1() => new($"{Solve1()}");
@@ -27,10 +27,10 @@ public class Day00 : BaseDay
 
     }
 
-    
+
     public long Solve1()
     {
-        
+
         Dijkstra2.Letsparty(_lines);
         return 0;
     }

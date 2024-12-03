@@ -124,20 +124,21 @@ namespace AoC_Helper_Methods.Algorithms
             }
 
             //potential starting points
-            int? shortestPath = int.MaxValue;
-            foreach (var item in graph.Where(x => x.value == 1).ToList())
-            {
-                item.IsStartNode = true;
-                var temp = FuckingGo(graph.ToArray(), item, graph.FirstOrDefault(x => x.IsEndNode == true));
-                if (temp < shortestPath)
-                {
-                    shortestPath = temp;
-                }
+            //int? shortestPath = int.MaxValue;
+            //foreach (var item in graph.Where(x => x.value == 1).ToList())
+            //{
+            //    item.IsStartNode = true;
+            //    var temp = FuckingGo(graph.ToArray(), item, graph.FirstOrDefault(x => x.IsEndNode == true));
+            //    if (temp < shortestPath)
+            //    {
+            //        shortestPath = temp;
+            //    }
 
-            }
-            Console.WriteLine($"Part 2: {shortestPath}");
-
-           // FuckingGo(graph.ToArray(), graph.FirstOrDefault(x => x.IsStartNode == true), graph.FirstOrDefault(x => x.IsEndNode == true));
+            //}
+            //Console.WriteLine($"Part 2: {shortestPath}");
+            
+            // one starting point
+            FuckingGo(graph.ToArray(), graph.FirstOrDefault(x => x.IsStartNode == true), graph.FirstOrDefault(x => x.IsEndNode == true));
 
         }
 
