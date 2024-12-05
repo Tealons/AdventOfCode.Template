@@ -43,18 +43,20 @@ namespace AoC_Helper_Methods.Algorithms
                 foreach (var item in line)
                 {
 
-                    var value = (int)item % 32;
-                    var node = new Node($"{x},{y}") { x = x, y = y, value = value };
-                    if (item.ToString() == "S")
+                    // var value = (int)item % 32;
+                    var node = new Node($"{x},{y}") { x = x, y = y, value = item };
+                    //if (item.ToString() == "S")
+                    if (x == 1 && y == 1)
                     {
-                        //node.IsStartNode = true;
-                        node.value = 1;
+                        node.IsStartNode = true;
+                        //node.value = 1;
                     }
 
-                    if (item.ToString() == "E")
+                    //if (item.ToString() == "E")
+                    if (x == 13 && y == 13)
                     {
                         node.IsEndNode = true;
-                        node.value = 26;
+                        //node.value = 26;
                     }
 
                     graph.Add(node);
@@ -73,10 +75,10 @@ namespace AoC_Helper_Methods.Algorithms
                 if (otherNode != null)
                 {
                     var distance = otherNode.value - item.value;
-                    if (distance < 2)
-                    {
-                        item.Edges.Add(new Edge(otherNode, 1));
-                    }
+                    //if (distance < 2)
+                    //{
+                    item.Edges.Add(new Edge(otherNode, 1));
+                    //}
                 }
 
 
@@ -88,10 +90,10 @@ namespace AoC_Helper_Methods.Algorithms
                 {
 
                     var distance = otherNode.value - item.value;
-                    if (distance < 2)
-                    {
+                    //if (distance < 2)
+                    //{
                         item.Edges.Add(new Edge(otherNode, 1));
-                    }
+                    //}
                 }
 
                 //x-1 y+1
@@ -102,10 +104,10 @@ namespace AoC_Helper_Methods.Algorithms
                 {
 
                     var distance = otherNode.value - item.value;
-                    if (distance < 2)
-                    {
+                    //if (distance < 2)
+                    //{
                         item.Edges.Add(new Edge(otherNode, 1));
-                    }
+                   // }
                 }
 
                 //x-1 y-1
@@ -116,10 +118,10 @@ namespace AoC_Helper_Methods.Algorithms
                 {
 
                     var distance = otherNode.value - item.value;
-                    if (distance < 2)
-                    {
+                    //if (distance < 2)
+                    //{
                         item.Edges.Add(new Edge(otherNode, 1));
-                    }
+                   // }
                 }
             }
 
@@ -136,7 +138,7 @@ namespace AoC_Helper_Methods.Algorithms
 
             //}
             //Console.WriteLine($"Part 2: {shortestPath}");
-            
+
             // one starting point
             FuckingGo(graph.ToArray(), graph.FirstOrDefault(x => x.IsStartNode == true), graph.FirstOrDefault(x => x.IsEndNode == true));
 
@@ -201,6 +203,14 @@ namespace AoC_Helper_Methods.Algorithms
 
                 foreach (var edge in current.Edges)
                 {
+                    int dx = Math.Abs(edge.ConnectedTo.x - distances.Reverse().Skip(1).First().Key.x);
+                    int dy = Math.Abs(edge.ConnectedTo.y - distances.Reverse().Skip(1).First().Key.y);
+
+                    if (dx > 3 || dy > 3)
+                    {
+                        continue;
+                    }
+
                     // get the current shortest distance to the connected node
                     Distance distance = distances[edge.ConnectedTo].Distance;
                     // calculate the new cumulative distance to the edge
